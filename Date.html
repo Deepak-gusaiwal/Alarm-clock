@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Date Methods</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Date Methods</h1>
+    </div>
+    <div id="show">
+
+    </div>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <h1>Option to set an Alarm</h1>
+                <label for="">Set your Alarm</label>
+                <input type="text" class="form-control" placeholder="Enter the time in yyy-mm-dd hh:mm:sec " name="" id="input">
+                <small id=" " class="form-text text-muted ">We'll love to share your alarm with anyone else.</small>
+            </div>
+            <button type="submit " id="submit-alarm" class="btn btn-primary ">Submit</button>
+        </form>
+
+    </div>
+
+    <script>
+        //   practice
+        console.log('this is practice ');
+        let date = new Date()
+            // date = date.toDateString()
+        let date2 = new Date("2021-12-01 13:06:34")
+        console.log(date2 - date)
+
+
+
+
+        // 2021-11-26 06:26:55
+
+
+        // Project started form here
+        let submit = document.getElementById('submit-alarm')
+        submit.addEventListener('click', (e) => {
+            e.preventDefault();
+            let input = document.getElementById('input');
+            let InputVal = input.value
+            let regex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{1,2}:[0-9]{2}:[0-9]{2}$/
+            let test = regex.test(InputVal)
+            if (test) {
+                console.log('value is correct');
+
+                let setTime = new Date(InputVal)
+                let nowTime = new Date()
+                let TimetoCallAlarm = setTime - nowTime
+                console.log(TimetoCallAlarm)
+                if (TimetoCallAlarm >= 0) {
+                    setTimeout(() => {
+                        console.warn('Alarm is ringing')
+                    }, TimetoCallAlarm);
+                    success();
+                } else {
+                    console.log('this time cant be settin');
+                    Aftertime();
+                }
+            } else {
+                console.log('value is not correct');
+                TypingError();
+            }
+
+        })
+
+        //    function to show the alert on wrong input
+        function TypingError() {
+            let show = document.getElementById('show');
+            let html = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Set the time in the given time formate</strong> there has a typing Error
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>`
+            show.innerHTML = html;
+            setTimeout(() => {
+                show.innerHTML = ""
+            }, 4000);
+        }
+
+        // incorect time:- the set time to alarm is already passed
+        function Aftertime() {
+            let show = document.getElementById('show');
+            let html = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>This time is already passed please set a future time to alarm.</strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>`
+            show.innerHTML = html;
+            setTimeout(() => {
+                show.innerHTML = ""
+            }, 4000);
+        }
+        // succes time:- when the stet time is in correct formate or be a future time
+        function success() {
+            let show = document.getElementById('show');
+            let html = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>The time is set</strong> Alarm is ringing on its time 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>`
+            show.innerHTML = html;
+            setTimeout(() => {
+                show.innerHTML = ""
+            }, 4000);
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+</body>
+
+</html>
